@@ -1,0 +1,50 @@
+@WebServlet("/register")
+public class RegisterServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        out.println("<h3>Register</h3>");
+        out.println("<form method='post'>");
+
+        // Session dropdown
+        out.println("Session: <select name='session'>");
+        for (int i = 1; i <= 4; i++) {
+            out.printf("<option value='%d'>Session %d</option>", i, i);
+        }
+        out.println("</select><br>");
+
+        // Name + Birth Year
+        out.println("Name: <input type='text' name='name'><br>");
+        out.println("Birth Year: <input type='text' name='year'><br>");
+
+        // Level dropdown
+        String[] levels = {"Starfish", "Minnows", "Guppies", "Dolphins"};
+        out.println("Level: <select name='level'>");
+        for (String l : levels) {
+            out.printf("<option value='%s'>%s</option>", l, l);
+        }
+        out.println("</select><br>");
+
+        // Time choices
+        String[] times = {"9am", "10am", "1pm", "2pm"};
+        out.println("Time (1st Choice): ");
+        for (String t : times) {
+            out.printf("<input type='radio' name='time1' value='%s'> %s", t, t);
+        }
+        out.println("<br>");
+
+        out.println("Time (2nd Choice): ");
+        for (String t : times) {
+            out.printf("<input type='radio' name='time2' value='%s'> %s", t, t);
+        }
+        out.println("<br>");
+
+        // Submit button
+        out.println("<button type='submit'>Register</button>");
+        out.println("</form>");
+    }
