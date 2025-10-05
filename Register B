@@ -1,0 +1,25 @@
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        int session = Integer.parseInt(req.getParameter("session"));
+        String name = req.getParameter("name");
+        int birthYear = Integer.parseInt(req.getParameter("year"));
+        String level = req.getParameter("level");
+        String time1 = req.getParameter("time1");
+        String time2 = req.getParameter("time2");
+
+        // Calculate age (simple version, current year = 2025)
+        int age = 2025 - birthYear;
+
+        // Create student
+        Student s = new Student(name, session, age, level, time1, time2);
+
+        // Add to student list
+        List<Student> students = (List<Student>) getServletContext().getAttribute("students");
+        students.add(s);
+
+        // Redirect to ListStudents
+        resp.sendRedirect("students");
+    }
+}
